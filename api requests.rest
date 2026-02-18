@@ -1,0 +1,21 @@
+GET http://localhost:5005/v1 
+###
+POST http://localhost:5005/v1/auth/register
+Content-Type: application/json
+
+{
+    "first_name":"testF",
+    "last_name":"testL",
+    "email":"123@mail.com",
+    "password":"123password123"
+}
+###
+POST http://localhost:5005/v1/auth/login
+Content-Type: application/json
+
+{
+    "first_name":"testF",
+    "last_name":"testL",
+    "email":"123@mail.com",
+    "password":"123password123"
+}
