@@ -65,6 +65,19 @@ export async function Login(req, res) {
         // return user info except password
         const { password, ...user_data } = user._doc;
 
+        let options = {
+            maxAge: 20 * 60 * 1000, // would expire in 20minutes
+            httpOnly: true, // The cookie is only accessible by the web server
+            secure: true,
+            sameSite: "None",
+        };
+        const token = user.generateAccessJWT(); // generate session token for user
+        res.cookie("SessionID", token, options); // set the token to response header, so that the client sends it back on each subsequent request
+        res.status(200).json({
+            status: "success",
+            message: "You have successfully logged in.",
+        });
+
         res.status(200).json({
             status: "success",
             data: [user_data],

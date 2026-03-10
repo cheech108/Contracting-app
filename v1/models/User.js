@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+import jwt from 'jsonwebtoken';
+import { SECRET_ACCESS_TOKEN } from '../config/index.js';
+
 const UserSchema = new mongoose.Schema(
     {
         first_name: {
@@ -35,4 +38,12 @@ const UserSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+UserSchema.methods.generateAccessJWT = function () {
+  let payload = {
+    id: this._id,
+  };
+  return jwt.sign(payload, SECRET_ACCESS_TOKEN, {
+    expiresIn: '20m',
+  });
+};
 export default mongoose.model("users", UserSchema);

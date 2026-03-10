@@ -1,4 +1,5 @@
 import Auth from './auth.js';
+import Verify from '../middleware/verify.js';
 const Router = (server) => {
 server.use('/v1/auth', Auth);
 server.get("/v1", (req, res) => {
@@ -15,5 +16,11 @@ server.get("/v1", (req, res) => {
         });
     }
 })
+server.get("/v1/user", Verify, (req, res) => {
+    res.status(200).json({
+        status: "success",
+        message: "Welcome to the your Dashboard!",
+    });
+});
 };
 export default Router;
