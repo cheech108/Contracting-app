@@ -29,14 +29,16 @@ function Login() {
   };
 
   return (  
-    <div className="centered-div">
-      <div className="top-section">
-        <p className="top-words">Login</p>
+    <div className="login-page">
+      <div className="centered-div">
+        <div className="top-section">
+          <p className="top-words">Sign In</p>
+        </div>
+        {message && <p className="Error-text">{message}</p>}
+        <input type="email" className="text-input" name="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <input type="password" className="text-input" name="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+        <input type="button" className="login-button" value="Login" onClick={handleLogin}/>
       </div>
-      {message && <p className="Error-text">{message}</p>}
-      <input type="email" className="text-input" name="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-      <input type="password" className="text-input" name="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-      <input type="button" className="login-button" value="Login" onClick={handleLogin}/>
     </div>
   );
 }
