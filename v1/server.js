@@ -7,7 +7,10 @@ import Router from "./routes/index.js";
 
 const server = express();
 
-server.use(cors());
+server.use(cors({
+    origin: 'http://localhost:5173', // Allow your React dev server
+    credentials: true // Allow cookies to be sent cross-origin
+}));
 server.disable("x-powered-by");
 server.use(cookieParser());
 server.use(express.urlencoded({ extended: false }));

@@ -1,15 +1,23 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
+import { SECRET_ACCESS_TOKEN } from "../config/index.js";
 
 export async function Verify(req, res, next) {
     try {
-        const authHeader = req.headers["cookie"]; // get the session cookie from request header
+        const authHeader = req.headers["authorization"];
 
-        if (!authHeader) return res.sendStatus(401); 
-        const cookie = authHeader.split("=")[1];
+        if (!authHeader) {
+            return res.sendStatus(401);
+        }
 
-        // checking the integrity of the cookie
-        jwt.verify(cookie, config.SECRET_ACCESS_TOKEN, async (err, decoded) => {
+        const token = authHeader.split(" ")[1]; // Extract token from "Bearer <token>"
+        
+        if (!token) {
+            return res.sendStatus(401);
+        }
+
+        // checking the integrity of the token
+        jwt.verify(token, SECRET_ACCESS_TOKEN, async (err, decoded) => {
             if (err) {
                 // if token has been altered or has expired, return an unauthorized error
                 return res

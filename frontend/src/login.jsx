@@ -15,12 +15,18 @@ function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include'
       });
+      const data = await response.json();
       if (response.ok) {
+        // Store token for client-side use
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+        }
         setMessage("Login successful!");
-        //window.location.href = "/dash";
+        window.location.href = "/dash";
       } else {
-        setMessage("Login failed. Please check your credentials.");
+        setMessage(data.message || "Login failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("Error:", error);

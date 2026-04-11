@@ -68,14 +68,15 @@ export async function Login(req, res) {
         let options = {
             maxAge: 20 * 60 * 1000, // would expire in 20minutes
             httpOnly: true, // The cookie is only accessible by the web server
-            secure: true,
-            sameSite: "None",
+            secure: false, // Set to false for development (HTTP); true for production (HTTPS)
+            sameSite: "Lax", // Use 'Lax' for dev; 'None' requires secure: true
         };
         const token = user.generateAccessJWT(); // generate session token for user
-        res.cookie("SessionID", token, options); // set the token to response header, so that the client sends it back on each subsequent request
+        res.cookie("SessionID", token, options); // set the token to response header for server-side use
         res.status(200).json({
             status: "success",
             data: [user_data],
+            token: token, // Include token in response for client-side storage
             message: "You have successfully logged in.",
         });
     } catch (err) {
