@@ -1,7 +1,9 @@
 import Auth from './auth.js';
+import Job from './jobs.js';
 import Verify from '../middleware/verify.js';
 const Router = (server) => {
 server.use('/v1/auth', Auth);
+server.use('/v1/jobs', Job)
 server.get("/v1", (req, res) => {
     try {
         res.status(200).json({

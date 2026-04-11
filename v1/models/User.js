@@ -35,6 +35,9 @@ const UserSchema = new mongoose.Schema(
             required: true,
             default: 1,
         },
+        jobs:{
+            type: mongoose.Schema.Types.Array
+        }
     },
     { timestamps: true }
 );

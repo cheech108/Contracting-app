@@ -21,3 +21,23 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:5005/v1/user
+Authorization: Bearer token
+
+###
+POST http://localhost:5005/v1/jobs/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiMGViNmJiMDhiYjI4YmQ4ZGY4OSIsImlhdCI6MTc3NTkyNDI3MiwiZXhwIjoxNzc1OTI1NDcyfQ.ueemzEG1iAKMU8FDXo17f0GQFw-VlJ-4qroLbgPZpgk
+Content-Type: application/json
+
+{
+    "title":"test job",
+    "positions":{"intern":0,"full-time":50}
+}
+###
+POST http://localhost:5005/v1/jobs/add-contractor
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiMGViNmJiMDhiYjI4YmQ4ZGY4OSIsImlhdCI6MTc3NTkyNTk2MSwiZXhwIjoxNzc1OTI3MTYxfQ.YkzrfSqnx9hjacgS_4spkpUCBbCtrJIAzhxCWRy8syI
+Content-Type: application/json
+
+{
+    "jobId":"69da7856b460bf5420e105a4",
+    "position":"intern"
+}
