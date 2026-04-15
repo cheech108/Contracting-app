@@ -17,8 +17,12 @@ const JobSchema = new mongoose.Schema(
             required: "a creator id is needed"
         },
         contractors:{
-            // {"user id":"position name"}
+            // {"user id":{"position":"position name","quickbooksid",""}}
             type:Map
+        },
+        form:{
+            type:mongoose.Schema.Types.ObjectId,
+            required: "a form id is needed, this is a technical error and is not the users fault."
         }
     }
 )

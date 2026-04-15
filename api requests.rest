@@ -1,3 +1,4 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiMGViNmJiMDhiYjI4YmQ4ZGY4OSIsImlhdCI6MTc3NjI3NTEyOCwiZXhwIjoxNzc2Mjc2MzI4fQ.POWKm7id59JbNR4bjk_oai6EKPupW0kEAhnjX0rz4EM
 GET http://localhost:5005/v1 
 ###
 POST http://localhost:5005/v1/auth/register
@@ -40,4 +41,22 @@ Content-Type: application/json
 {
     "jobId":"69da7856b460bf5420e105a4",
     "position":"intern"
+}
+###
+POST http://localhost:5005/v1/jobs/create-form
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "fields":[{"id":"q1","type":"text","label":"Quetion 1","required":false}]
+}
+###
+POST http://localhost:5005/v1/jobs/respond-form
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "formId":"69dfcc13bdefe5d4298abebe",
+    "hoursWorked": 2,
+    "answers":{"q1":"text"}
 }

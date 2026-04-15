@@ -1,6 +1,7 @@
 import express from "express";
 import { check } from "express-validator";
 import { create, addContractor } from "../controllers/jobs.js"
+import { createForm, createSubmission } from "../controllers/forms.js"
 import Validate from "../middleware/validate.js";
 import Verify from "../middleware/verify.js";
 
@@ -31,5 +32,19 @@ router.post(
     Validate,
     addContractor
 );
+
+router.post(
+    "/create-form",
+    Verify,
+    Validate,
+    createForm
+)
+
+router.post(
+    "/respond-form",
+    Verify,
+    Validate,
+    createSubmission
+)
 
 export default router;
