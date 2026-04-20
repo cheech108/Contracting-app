@@ -37,7 +37,7 @@ export async function create(req, res){
 }
 
 export async function getJob(req,res){
-    const {jobId} = req.body;
+    const {jobId} = req.query;
     try {
         const foundJob = await job.findById(jobId)
         if (!foundJob) {
@@ -57,7 +57,7 @@ export async function getJob(req,res){
         res.status(500).json({
             status: "error",
             code: 500,
-            data: [],
+            data: [err.message],
             message: "Internal Server Error",
         });
     }

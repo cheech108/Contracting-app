@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./modules/navbar.jsx";
+import Jobblock from "./modules/jobblock.jsx";
+import './dash.css';
 
 function Dash() {
-    const [userName, setUserName] = useState('');
+    const [user, setUserData] = useState(null);
 
     const handleLogin = async () => {
         try {
@@ -16,7 +18,8 @@ function Dash() {
             });
             if (response.ok) {
                 const data = await response.json();
-                return data.user_name;
+                console.log(data)
+                return data.user;
             } else {
                 return "ERROR";
             }
@@ -27,13 +30,20 @@ function Dash() {
     };
 
     useEffect(() => {
-        handleLogin().then(setUserName);
+        handleLogin().then(setUserData);
     }, []);
 
+    if (!user) return
+
     return (
-        <div>
+        <div className="dash-body">
             <Navbar />
-            <p>{userName}</p>
+            <h1 className="welcome-message">Welcome {user.first_name}!</h1>
+            {
+                user.jobs.map((job) => (
+                    <Jobblock jobId={job} />
+                ))
+            }
         </div>
     );
 }
