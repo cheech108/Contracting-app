@@ -36,7 +36,8 @@ const UserSchema = new mongoose.Schema(
             default: 1,
         },
         jobs:{
-            type: mongoose.Schema.Types.Array
+            type: mongoose.Schema.Types.Array,
+            required: true
         }
     },
     { timestamps: true }
@@ -46,7 +47,7 @@ UserSchema.methods.generateAccessJWT = function () {
     id: this._id,
   };
   return jwt.sign(payload, SECRET_ACCESS_TOKEN, {
-    expiresIn: '20m',
+    expiresIn: '1hr',
   });
 };
 export default mongoose.model("users", UserSchema);

@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiMGViNmJiMDhiYjI4YmQ4ZGY4OSIsImlhdCI6MTc3NjI3NTEyOCwiZXhwIjoxNzc2Mjc2MzI4fQ.POWKm7id59JbNR4bjk_oai6EKPupW0kEAhnjX0rz4EM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiMGViNmJiMDhiYjI4YmQ4ZGY4OSIsImlhdCI6MTc3NjY0Njg5NywiZXhwIjoxNzc2NjUwNDk3fQ.02rO68gAai1o4d7UfE6QCogZ4FZWrTE9X6JEWL3qwD0
 GET http://localhost:5005/v1 
 ###
 POST http://localhost:5005/v1/auth/register
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:5005/v1/user
-Authorization: Bearer token
+Authorization: Bearer {{token}}
 
 ###
 POST http://localhost:5005/v1/jobs/create
@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 ###
 POST http://localhost:5005/v1/jobs/add-contractor
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiMGViNmJiMDhiYjI4YmQ4ZGY4OSIsImlhdCI6MTc3NTkyNTk2MSwiZXhwIjoxNzc1OTI3MTYxfQ.YkzrfSqnx9hjacgS_4spkpUCBbCtrJIAzhxCWRy8syI
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -59,4 +59,11 @@ Content-Type: application/json
     "formId":"69dfcc13bdefe5d4298abebe",
     "hoursWorked": 2,
     "answers":{"q1":"text"}
+}
+###
+Get http://localhost:5005/v1/jobs/get-job
+Content-Type: application/json
+
+{
+    "jobId":"69da7856b460bf5420e105a4"
 }

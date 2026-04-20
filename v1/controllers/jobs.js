@@ -1,7 +1,8 @@
 import job from "../models/Jobs.js"
+import User from "../models/User.js";
 
 export async function create(req, res){
-    const { title, positions } = req.body;
+    const { title, positions,form } = req.body;
     const creator = req.user._id;
     try {
         const existingJob = await job.findOne({ title });
@@ -15,7 +16,8 @@ export async function create(req, res){
             title,
             positions,
             creator,
-            contractors: new Map()
+            contractors: new Map(),
+            form:form
         });
         const savedJob = await newJob.save();
         res.status(200).json({
@@ -34,9 +36,37 @@ export async function create(req, res){
     }
 }
 
+export async function getJob(req,res){
+    const {jobId} = req.body;
+    try {
+        const foundJob = await job.findById(jobId)
+        if (!foundJob) {
+            return res.status(404).json({
+                status: "failed",
+                message: "Job not found",
+            });
+        }
+        const { positions, contractors, ...job_data } = foundJob._doc;
+        res.status(200).json({
+            status: "success",
+            data: [job_data],
+            message:
+                "Here is your job",
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: "error",
+            code: 500,
+            data: [],
+            message: "Internal Server Error",
+        });
+    }
+}
+
 export async function addContractor(req, res) {
     const { jobId, position } = req.body;
     const userId = req.user._id.toString();
+    const user = await User.findById(userId);
     try {
         const foundJob = await job.findById(jobId);
         if (!foundJob) {
@@ -55,7 +85,8 @@ export async function addContractor(req, res) {
         if (!foundJob.contractors) {
             foundJob.contractors = new Map();
         }
-        console.log(userId);
+        user.jobs.push(jobId);
+        await user.save();
         foundJob.contractors.set(userId, position);
         foundJob.markModified('contractors');
         await foundJob.save();
@@ -68,7 +99,7 @@ export async function addContractor(req, res) {
         res.status(500).json({
             status: "error",
             code: 500,
-            data: [],
+            data: [err.message],
             message: "Internal Server Error",
         });
     }

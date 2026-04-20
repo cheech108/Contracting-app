@@ -1,18 +1,14 @@
 import User from "../models/User.js";
 
 export async function Register(req, res) {
-    // get required variables from request body
-    // using es6 object destructing
     const { first_name, last_name, email, password } = req.body;
     try {
-        // create an instance of a user
         const newUser = new User({
             first_name,
             last_name,
             email,
             password,
         });
-        // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser)
             return res.status(400).json({
@@ -20,7 +16,7 @@ export async function Register(req, res) {
                 data: [],
                 message: "It seems you already have an account, please log in instead.",
             });
-        const savedUser = await newUser.save(); // save new user into the database
+        const savedUser = await newUser.save();
         const { role, ...user_data } = savedUser._doc;
         res.status(200).json({
             status: "success",
@@ -39,10 +35,8 @@ export async function Register(req, res) {
     res.end();
 }
 export async function Login(req, res) {
-    // Get variables for the login process
     const { email } = req.body;
     try {
-        // Check if user exists
         const user = await User.findOne({ email }).select("+password");
         if (!user)
             return res.status(401).json({
@@ -51,10 +45,7 @@ export async function Login(req, res) {
                 message:
                     "Invalid email or password. Please try again with the correct credentials.",
             });
-        // if user exists
-        // validate password
         const isPasswordValid = req.body.password === user.password
-        // if not valid, return unathorized response
         if (!isPasswordValid)
             return res.status(401).json({
                 status: "failed",
@@ -66,17 +57,17 @@ export async function Login(req, res) {
         const { password, ...user_data } = user._doc;
 
         let options = {
-            maxAge: 20 * 60 * 1000, // would expire in 20minutes
-            httpOnly: true, // The cookie is only accessible by the web server
-            secure: false, // Set to false for development (HTTP); true for production (HTTPS)
-            sameSite: "Lax", // Use 'Lax' for dev; 'None' requires secure: true
+            maxAge: 60 * 60 * 1000,
+            httpOnly: true,
+            secure: false,
+            sameSite: "Lax",
         };
-        const token = user.generateAccessJWT(); // generate session token for user
-        res.cookie("SessionID", token, options); // set the token to response header for server-side use
+        const token = user.generateAccessJWT();
+        res.cookie("SessionID", token, options);
         res.status(200).json({
             status: "success",
             data: [user_data],
-            token: token, // Include token in response for client-side storage
+            token: token,
             message: "You have successfully logged in.",
         });
     } catch (err) {
