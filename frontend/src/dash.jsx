@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./modules/navbar.jsx";
 import Jobblock from "./modules/jobblock.jsx";
+import CreateJob from "./modules/creatjob.jsx";
 import './dash.css';
 
 function Dash() {
     const [user, setUserData] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleLogin = async () => {
         try {
@@ -38,12 +40,23 @@ function Dash() {
     return (
         <div className="dash-body">
             <Navbar />
-            <h1 className="welcome-message">Welcome {user.first_name}!</h1>
+            <div className="dash-header">
+                <h1 className="welcome-message">Welcome {user.first_name}!</h1>
+                <button className="create-button" onClick={() => setShowPopup(true)}>Create Job</button>
+            </div>
             {
                 user.jobs.map((job) => (
                     <Jobblock jobId={job} />
                 ))
             }
+            {showPopup && (
+                <div className="popup-overlay" >
+                    <div className="popup-form" onClick={(e) => e.stopPropagation()}>
+                        <CreateJob />
+                    </div>
+                    <button onClick={() => setShowPopup(false)}>close</button>
+                </div>
+            )}
         </div>
     );
 }

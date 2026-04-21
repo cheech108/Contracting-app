@@ -11,7 +11,8 @@ const FieldSchema = new mongoose.Schema({
     enum: [
       "text",
       "radio",
-      "checkbox"
+      "checkbox",
+      "dropdown"
     ]
   },
   label: {
@@ -23,12 +24,9 @@ const FieldSchema = new mongoose.Schema({
     default: false
   },
 
-  // For select, radio, checkbox
+  // For dropdown and radio
   options: [
-    {
-      label: String,
-      value: String
-    }
+
   ],
 
 

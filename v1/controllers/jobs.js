@@ -4,6 +4,7 @@ import User from "../models/User.js";
 export async function create(req, res){
     const { title, positions,form } = req.body;
     const creator = req.user._id;
+    const user = await User.findById(creator);
     try {
         const existingJob = await job.findOne({ title });
         if (existingJob)
@@ -20,6 +21,9 @@ export async function create(req, res){
             form:form
         });
         const savedJob = await newJob.save();
+        let jobId = savedJob._id;
+        user.jobs.push(jobId);
+        await user.save();
         res.status(200).json({
             status: "success",
             data: [savedJob],
@@ -30,7 +34,7 @@ export async function create(req, res){
         res.status(500).json({
             status: "error",
             code: 500,
-            data: [],
+            data: [err.message],
             message: "Internal Server Error",
         });
     }

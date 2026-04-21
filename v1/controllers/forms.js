@@ -18,7 +18,7 @@ export async function createForm(req, res){
             res.status(500).json({
                 status: "error",
                 code: 500,
-                data: [],
+                data: [err.message],
                 message: "Internal Server Error",
             });
         }
@@ -48,7 +48,7 @@ export async function createSubmission(req, res){
             res.status(500).json({
                 status: "error",
                 code: 500,
-                data: [],
+                data: [err.message],
                 message: "Internal Server Error",
             });
         }
