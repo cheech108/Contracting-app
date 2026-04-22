@@ -81,3 +81,9 @@
     padding: 10px 20px;
     cursor: pointer;
 }
+
+.closeButton{
+    width: 100%;
+    background-color: white;
+    border-radius: 15px;
+}

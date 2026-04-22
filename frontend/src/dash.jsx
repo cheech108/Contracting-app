@@ -53,8 +53,8 @@ function Dash() {
                 <div className="popup-overlay" >
                     <div className="popup-form" onClick={(e) => e.stopPropagation()}>
                         <CreateJob />
+                        <button className="closeButton" onClick={() => setShowPopup(false)}>close</button>
                     </div>
-                    <button onClick={() => setShowPopup(false)}>close</button>
                 </div>
             )}
         </div>

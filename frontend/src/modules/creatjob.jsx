@@ -175,7 +175,7 @@ const CreateJob = () => {
             ))}
             <button type="button" onClick={addQuestion}>Add Question</button>
             <hr/>
-            <button type="submit">Submit</button>
+            <button style={{color:"white",width:"100%",borderRadius:"15px",backgroundColor:"blue"}} type="submit">Submit</button>
             <p>{output}</p>
         </form>
     );

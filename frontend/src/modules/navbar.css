@@ -55,9 +55,13 @@
 }
 
 .navbar-right .login-Button {
-    border-color: #00000000;
+    border-width: 0px;
     color: #ffffff;
-    background-color: #03284d;
+    background-color: #0064c9;
     border-radius: 15%;
     font-size: 20px;
+    cursor: pointer;
+}
+.navbar-right .login-Button:hover {
+    background-color: #03284d;
 }
