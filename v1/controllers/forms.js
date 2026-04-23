@@ -53,3 +53,29 @@ export async function createSubmission(req, res){
             });
         }
 }
+
+export async function getForm(req, res){
+    const {formId} = req.query;
+    try {
+            const foundForm = await Form.findById(formId)
+            if (!foundForm) {
+                return res.status(404).json({
+                    status: "failed",
+                    message: "Form not found",
+                });
+            }
+            res.status(200).json({
+                status: "success",
+                data: [foundForm],
+                message:
+                    "Here is your Form",
+            });
+        } catch (err) {
+            res.status(500).json({
+                status: "error",
+                code: 500,
+                data: [err.message],
+                message: "Internal Server Error",
+            });
+    }
+}

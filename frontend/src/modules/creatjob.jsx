@@ -163,7 +163,6 @@ const CreateJob = () => {
                         <select name="" type={field.type} onChange={(e) => updateFormField(field.id, "type", e.target.value)}>
                             <option value="text">text</option>
                             <option value="dropdown">drop down</option>
-                            <option value="checkbox">check box</option>
                             <option value="radio">radio</option>
                         </select>
                         {(field.type === "dropdown"||field.type === "radio") && <textarea style={{height:"50px", width:"100%", fontSize:"10px"}} onChange={(e) => updateFormOptions(field.id, e.target.value)} placeholder="enter options for the question comma seperated EX: option1,option2"/>}

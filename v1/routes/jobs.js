@@ -1,7 +1,7 @@
 import express from "express";
 import { check } from "express-validator";
 import { create, addContractor, getJob } from "../controllers/jobs.js"
-import { createForm, createSubmission } from "../controllers/forms.js"
+import { createForm, createSubmission, getForm } from "../controllers/forms.js"
 import Validate from "../middleware/validate.js";
 import Verify from "../middleware/verify.js";
 
@@ -49,6 +49,12 @@ router.post(
     Verify,
     Validate,
     createForm
+)
+
+router.get(
+    "/get-form",
+    Validate,
+    getForm
 )
 
 router.post(

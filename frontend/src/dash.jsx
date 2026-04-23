@@ -20,7 +20,6 @@ function Dash() {
             });
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
                 return data.user;
             } else {
                 return "ERROR";

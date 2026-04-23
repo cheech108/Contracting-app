@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiMGViNmJiMDhiYjI4YmQ4ZGY4OSIsImlhdCI6MTc3NjY0Njg5NywiZXhwIjoxNzc2NjUwNDk3fQ.02rO68gAai1o4d7UfE6QCogZ4FZWrTE9X6JEWL3qwD0
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiMGViNmJiMDhiYjI4YmQ4ZGY4OSIsImlhdCI6MTc3NjkxMjkzMSwiZXhwIjoxNzc2OTE2NTMxfQ.Ej0zATGYuNH5QzH63hhU9Emx47FH0wKoY-kprzrrcU4
 GET http://localhost:5005/v1 
 ###
 POST http://localhost:5005/v1/auth/register

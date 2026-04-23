@@ -1,0 +1,20 @@
+.form-body{
+    background-color: #034F84;
+    height:100vh;
+}
+.title{
+    color:white;
+    text-align: center;
+}
+.form{
+    background-color: white;
+    border-radius: 15px;
+}
+.innerQuestion{
+    width: 25%;
+    padding-left: 40%;
+}
+.radio-option {
+  display: block;
+  margin-bottom: 8px;
+}
